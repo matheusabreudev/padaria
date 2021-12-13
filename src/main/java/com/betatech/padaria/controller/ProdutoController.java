@@ -21,35 +21,35 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/padaria")
+@RequestMapping(path= "/padaria")
 public class ProdutoController {
 	
 	private final ProdutoService produtoService;
 	
-	@GetMapping("/produtos")
+	@GetMapping(path= "/produtos")
 	public ResponseEntity<List<ProdutoEntity>> getProdutos() {
 		return ResponseEntity.ok().body(produtoService.getProdutoEntities());
 	}
 	
-	@GetMapping("/produto/{id}")
+	@GetMapping(path= "/produto/{id}")
 	public ResponseEntity<ProdutoEntity> getProdutoById (@PathVariable("id") Long id) {
 		ProdutoEntity produtoEntity = produtoService.findProdutoById(id);
 		return new ResponseEntity<>(produtoEntity, HttpStatus.OK);
 	}
 	
-	@PostMapping("/salvar")
+	@PostMapping(path= "/salvar")
 	public ResponseEntity<ProdutoEntity> salvarProduto(@RequestBody ProdutoEntity produtoEntity) {
 		ProdutoEntity newProdutoEntity = produtoService.salvar(produtoEntity);
 		return new ResponseEntity<>(newProdutoEntity, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/attProduto")
+	@PutMapping(path= "/attProduto")
 	public ResponseEntity<ProdutoEntity> updateProduto(@RequestBody ProdutoEntity produtoEntity) {
 		ProdutoEntity updateProduto = produtoService.updateProduto(produtoEntity);
 		return new ResponseEntity<>(updateProduto, HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/deletar/{id}")
+	@DeleteMapping(path= "/deletar/produto/{id}")
 	public ResponseEntity<?> deleteProduto(@PathVariable("id") Long id) {
 		produtoService.deleteProduto(id);
 		return new ResponseEntity<>(HttpStatus.OK);
