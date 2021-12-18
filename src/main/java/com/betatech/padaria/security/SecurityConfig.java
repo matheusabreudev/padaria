@@ -39,7 +39,7 @@ import lombok.RequiredArgsConstructor;
 			http.csrf().disable();
 			http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 			http.authorizeRequests().antMatchers("/padaria/login/**","/padaria/token/refresh/**").permitAll();
-			http.authorizeRequests().antMatchers(HttpMethod.GET,"/padaria/funcionarios/**","/padaria/produtos/**").hasAnyAuthority("ROLE_USER");
+			http.authorizeRequests().antMatchers(HttpMethod.GET,"/padaria/funcionarios/**","/padaria/produtos/**").hasAnyAuthority("ROLE_USER","ROLE_SUPER_ADMIN");
 			http.authorizeRequests().antMatchers(HttpMethod.POST,"/padaria/produto/salvar/**","/padaria/funcionario/salvar").hasAnyAuthority("ROLE_ADMIN");
 			http.authorizeRequests().anyRequest().authenticated();
 			http.addFilter(customAuthenticationFilter);
